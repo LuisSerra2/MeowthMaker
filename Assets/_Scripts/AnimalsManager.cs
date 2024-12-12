@@ -74,7 +74,7 @@ public class AnimalsManager : MonoBehaviour
 
     private void DestroyAnimals()
     {
-        Player.Instance.score.Save("Score");
+        Player.Instance.score.HighScored("HighScore");
         SoundManager.Instance.PopSound();
         if (Animals.Count >= 2)
         {

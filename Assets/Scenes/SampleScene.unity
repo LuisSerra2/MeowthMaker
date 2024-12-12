@@ -898,6 +898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   min: -2.1
   max: 2.1
+  defaultTimer: 0.3
   animals:
   - {fileID: 8935704838731463694, guid: d0c9269cd1ba44f4ea88e4e42f99feb4, type: 3}
   - {fileID: 8935704838731463694, guid: 4b0205556709a3247971b7f1730806ff, type: 3}
@@ -1222,7 +1223,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494168046}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3a6b83f5ca4720544952ea6b232c7328, type: 3}

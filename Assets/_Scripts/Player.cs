@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
 
     public float min, max;
 
+    public float defaultTimer = 0.2f;
+    private float timer;
+    private bool canDrop;
+
+    [Space]
+
     public GameObject[] animals;
     public Transform animalsGroup;
 
@@ -25,20 +31,20 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        canDrop = true;
+        timer = defaultTimer;
+
+        int savedScore = PlayerPrefs.GetInt("Score", 0);
+        int savedHighScore = PlayerPrefs.GetInt("HighScore", 0);
+
         if (!resetScore)
         {
-            score = new Score(PlayerPrefs.GetInt("Score", 0));
+            score = new Score(savedScore, savedHighScore);
         } else
         {
-            score = new Score(PlayerPrefs.GetInt("Score", 0))
-            {
-                score = 0
-            };
-            score.Save("Score");
+            score = new Score(0, 0);
+            score.Save("Score", "HighScore");
         }
-
-        Debug.Log(score.score);
-
 
         initialPosition = new Vector2(0, transform.position.y);
         GetRandomAnimal();
@@ -46,9 +52,22 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleDrop();
+        Debug.Log("Score: " + score.score);
+        Debug.Log("HighScore: " + score.highScore);
 
-        if (Input.GetMouseButton(0))
+
+        if (!canDrop)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                canDrop = true;
+                GetRandomAnimal();
+            }
+        }
+
+        if (Input.GetMouseButton(0) && canDrop)
         {
             Vector3 pos = transform.position;
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -59,6 +78,8 @@ public class Player : MonoBehaviour
 
             transform.position = pos;
         }
+
+        HandleDrop();
 
     }
 
@@ -77,9 +98,10 @@ public class Player : MonoBehaviour
     {
         if (animalClone == null) return;
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && canDrop)
         {
-
+            timer = defaultTimer;
+            canDrop = false;
 
             animalClone.transform.SetParent(animalsGroup);
 
@@ -87,8 +109,6 @@ public class Player : MonoBehaviour
             animalClone.GetComponent<Rigidbody2D>().isKinematic = false;
 
             transform.position = initialPosition;
-
-            GetRandomAnimal();
         }
 
     }
