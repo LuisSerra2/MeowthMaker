@@ -2,39 +2,41 @@ using UnityEngine;
 
 public class Score
 {
-    public int score;
-    public int highScore;
+    public int CurrentScore { get; private set; }
+    public int HighScore { get; private set; }
 
-    public Score(int score, int highScore)
+    public Score(int currentScore, int highScore)
     {
-        this.score = score;
-        this.highScore = highScore;
+        CurrentScore = currentScore;
+        HighScore = highScore;
     }
 
-    public void AddScore(int addScore)
+    public void AddScore(int points)
     {
-        score += addScore;
+        CurrentScore += points;
     }
 
-    public void RemoveScore(int removeScore)
+    public bool CheckAndUpdateHighScore()
     {
-        score -= removeScore;
+        if (CurrentScore > HighScore)
+        {
+            HighScore = CurrentScore;
+            Save("Score", "HighScore");
+            return true;
+        }
+        return false;
     }
 
     public void Save(string scoreKey, string highScoreKey)
     {
-        PlayerPrefs.SetInt(scoreKey, score);
-        PlayerPrefs.SetInt(highScoreKey, highScore);
+        PlayerPrefs.SetInt(scoreKey, CurrentScore);
+        PlayerPrefs.SetInt(highScoreKey, HighScore);
         PlayerPrefs.Save();
     }
 
-    public void HighScored(string highScoreKey)
+    public void Load(string scoreKey, string highScoreKey)
     {
-        if (highScore <= score)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt(highScoreKey, highScore);
-            PlayerPrefs.Save();
-        }
+        CurrentScore = PlayerPrefs.GetInt(scoreKey, 0);
+        HighScore = PlayerPrefs.GetInt(highScoreKey, 0);
     }
 }

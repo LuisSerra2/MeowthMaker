@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+
+public enum GameStates
+{
+    MainMenu,
+    Playing,
+    EndGame,
+    ChangeTheme,
+}
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
+    public GameStates gameStates;
 
     public float min, max;
 
@@ -31,6 +39,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        //gameStates = GameStates.MainMenu;
+
         canDrop = true;
         timer = defaultTimer;
 
@@ -48,38 +58,57 @@ public class Player : MonoBehaviour
 
         initialPosition = new Vector2(0, transform.position.y);
         GetRandomAnimal();
+        UIManager.Instance.UpdateHighScoreUI();
     }
 
     private void Update()
     {
-        Debug.Log("Score: " + score.score);
-        Debug.Log("HighScore: " + score.highScore);
-
-
-        if (!canDrop)
+        switch (gameStates)
         {
-            timer -= Time.deltaTime;
+            case GameStates.MainMenu:
 
-            if (timer <= 0)
-            {
-                canDrop = true;
-                GetRandomAnimal();
-            }
+
+
+                break;
+
+            case GameStates.Playing:
+
+                if (!canDrop)
+                {
+                    timer -= Time.deltaTime;
+
+                    if (timer <= 0)
+                    {
+                        canDrop = true;
+                        GetRandomAnimal();
+                    }
+                }
+
+                if (Input.GetMouseButton(0) && canDrop)
+                {
+                    Vector3 pos = transform.position;
+                    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                    float animalSize = animalClone.transform.localScale.x;
+
+                    pos.x = Mathf.Clamp(mouseWorldPosition.x, min + animalSize / 2, max - animalSize / 2);
+
+                    transform.position = pos;
+                }
+
+                HandleDrop();
+
+                break;
+
+            case GameStates.EndGame:
+                AnimalsManager.Instance.PopAnimals();
+                break;
+
+            case GameStates.ChangeTheme:
+                break;
+
         }
 
-        if (Input.GetMouseButton(0) && canDrop)
-        {
-            Vector3 pos = transform.position;
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            float animalSize = animalClone.transform.localScale.x;
-
-            pos.x = Mathf.Clamp(mouseWorldPosition.x, min + animalSize / 2, max - animalSize / 2);
-
-            transform.position = pos;
-        }
-
-        HandleDrop();
 
     }
 
@@ -92,6 +121,7 @@ public class Player : MonoBehaviour
 
         animalClone.GetComponent<Collider2D>().isTrigger = true;
         animalClone.GetComponent<Rigidbody2D>().isKinematic = true;
+        animalClone.transform.GetChild(1).GetComponent<Collider2D>().gameObject.SetActive(false);
     }
 
     private void HandleDrop()
@@ -107,8 +137,11 @@ public class Player : MonoBehaviour
 
             animalClone.GetComponent<Collider2D>().isTrigger = false;
             animalClone.GetComponent<Rigidbody2D>().isKinematic = false;
+            animalClone.transform.GetChild(1).GetComponent<Collider2D>().gameObject.SetActive(true);
 
             transform.position = initialPosition;
+
+            AnimalsManager.Instance.AnimalsAlive.Add(animalClone);
         }
 
     }

@@ -15,7 +15,9 @@ public class Animal : MonoBehaviour
             if (animal.tier == tier)
             {
                 AnimalsManager.Instance.Animals.Add(gameObject);
-            } 
+                AnimalsManager.Instance.AnimalsAlive.Add(gameObject);
+
+            }
         }
     }
 
@@ -26,6 +28,7 @@ public class Animal : MonoBehaviour
             if (animal.tier == tier)
             {
                 AnimalsManager.Instance.Animals.Add(gameObject);
+                AnimalsManager.Instance.AnimalsAlive.Add(gameObject);
             }
         }
     }

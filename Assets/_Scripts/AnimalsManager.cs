@@ -18,8 +18,11 @@ public class AnimalsManager : MonoBehaviour
     private Tier tier;
 
     public List<GameObject> Animals = new List<GameObject>();
+    public List<GameObject> AnimalsAlive = new List<GameObject>();
 
     public GameObject[] tierOb;
+
+    public bool EndGame = false;
 
     private void Awake()
     {
@@ -70,17 +73,65 @@ public class AnimalsManager : MonoBehaviour
         animalClone.transform.localScale = Vector3.zero;
         animalClone.GetComponent<ScaleLerping>().enabled = true;
 
+        AnimalsAlive.Add(animalClone);
     }
 
     private void DestroyAnimals()
     {
-        Player.Instance.score.HighScored("HighScore");
         SoundManager.Instance.PopSound();
         if (Animals.Count >= 2)
         {
+            AnimalsAlive.Remove(Animals[0]);
+            AnimalsAlive.Remove(Animals[1]);
+
             Destroy(Animals[0]);
             Destroy(Animals[1]);
-            Animals.Clear(); 
+
+            Animals.RemoveAt(0);
+            Animals.RemoveAt(0);
         }
+    }
+
+    public void PopAnimals()
+    {
+        if (EndGame)
+        {
+            EndGame = false;
+
+            foreach (GameObject animal in AnimalsAlive)
+            {
+                if (animal != null)
+                {
+                    animal.GetComponent<Rigidbody2D>().isKinematic = true;
+                }
+            }
+
+            StartCoroutine(PopAnimalsAnim());
+        }
+    }
+
+    private IEnumerator PopAnimalsAnim()
+    {
+        for (int i = AnimalsAlive.Count - 1; i >= 0; i--)
+        {
+            if (AnimalsAlive[i] != null)
+            {
+                AnimalsAlive[i].GetComponent<ScaleLerping>().ScaleZero();
+                SoundManager.Instance.PopSound();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = AnimalsAlive.Count - 1; i >= 0; i--)
+        {
+            if (AnimalsAlive[i] != null)
+            {
+                Destroy(AnimalsAlive[i]);
+            }
+        }
+
+        AnimalsAlive.Clear();
     }
 }

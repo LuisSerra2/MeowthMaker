@@ -18,4 +18,11 @@ public class ScaleLerping : MonoBehaviour
 
         transform.DOScale(scale, timer);
     }
+
+    public void ScaleZero()
+    {
+        Vector3 scale = Vector3.zero;
+
+        transform.DOScale(scale, timer);
+    }
 }
