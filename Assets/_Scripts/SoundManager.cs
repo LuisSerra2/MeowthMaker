@@ -22,6 +22,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        if (SoundSettingsManager.Instance != null)
+        {
+            SoundSettingsManager.Instance.RegisterSoundManager(this);
+        }
+
         MusicAmbiente();
     }
 
