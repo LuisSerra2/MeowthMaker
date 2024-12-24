@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public TextMeshProUGUI[] highScoreTexts;
+    public TextMeshProUGUI scoreText;
 
     public Vector3 InPosition;
     public Vector3 OutPosition;
@@ -40,6 +41,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateScoreUI();
         Retry.onClick.AddListener(() => RetryButton());
         ReturnToMainMenu.onClick.AddListener(() => ReturnToMainMenuButton());
 
@@ -49,17 +51,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-
-    private void Update()
+    public void EndGameUI()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            score.AddScore(10);
-            bool isNewHighScore = score.CheckAndUpdateHighScore();
-            UpdateHighScoreUI(isNewHighScore);
-            AnimateIn(EndMenu, hasContentAnimation: true);
-        }
+        bool isNewHighScore = score.CheckAndUpdateHighScore();
+        UpdateHighScoreUI(isNewHighScore);
+        AnimateIn(EndMenu, hasContentAnimation: true);
     }
 
     public void UpdateHighScoreUI(bool isNewHighScore = false)
@@ -73,10 +69,16 @@ public class UIManager : MonoBehaviour
             text.text = score.HighScore.ToString();
         }
     }
+    public void UpdateScoreUI()
+    {
+        score = Player.Instance.score;
+
+        scoreText.text = "Score: " + score.CurrentScore.ToString();
+    }
 
     private void RetryButton()
     {
-        string sceneName = SceneManager.GetActiveScene().name; 
+        string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
 

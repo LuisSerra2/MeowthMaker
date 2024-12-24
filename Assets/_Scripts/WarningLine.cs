@@ -18,7 +18,6 @@ public class WarningLine : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log((int)timer);
         if (IsInWarningLine)
         {
             timer += Time.deltaTime;

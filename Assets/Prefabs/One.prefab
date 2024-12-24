@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: One
       objectReference: {fileID: 0}
+    - target: {fileID: 3244225079492121269, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -56,6 +60,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4857140065527652200, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: m_TagString
+      value: Tier1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428097447114214184, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: spriteTag
+      value: Tier1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,7 +89,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328503168053457363}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f55bd4d4c7b2c68429a68d8df2dc7cf8, type: 2}
   m_CullingMode: 0

@@ -57,6 +57,7 @@ public class ThemeManager : MonoBehaviour
         ThemeAssets assets = themes[currentThemeIndex];
 
         UpdateSprites("Background", assets.Background);
+        UpdateSprites("BackgroundAnimal", assets.animalBackground);
         UpdateSprites("Button", assets.Buttons);
         UpdateSprites("PanelBackground", assets.PanelBackground);
         UpdateSprites("Exit", assets.ExitButtons);
@@ -85,6 +86,33 @@ public class ThemeManager : MonoBehaviour
             }
         }
     }
+
+    public Sprite GetSpriteForTag(string tag)
+    {
+        if (themes.Count == 0 || currentThemeIndex < 0 || currentThemeIndex >= themes.Count)
+        {
+            Debug.LogError("Theme is not properly set.");
+            return null;
+        }
+
+        ThemeAssets assets = themes[currentThemeIndex];
+
+        return tag switch
+        {
+            "Background" => assets.Background,
+            "BackgroundAnimal" => assets.animalBackground,
+            "Button" => assets.Buttons,
+            "PanelBackground" => assets.PanelBackground,
+            "Exit" => assets.ExitButtons,
+            "Tier1" => assets.tierAnimal[0],
+            "Tier2" => assets.tierAnimal[1],
+            "Tier3" => assets.tierAnimal[2],
+            "Tier4" => assets.tierAnimal[3],
+            "Tier5" => assets.tierAnimal[4],
+            _ => null,
+        };
+    }
+
 
     private void SaveTheme()
     {
@@ -125,6 +153,7 @@ public class ThemeAssets
 {
     public string themeName;
     public Sprite Background;
+    public Sprite animalBackground;
     public Sprite Buttons;
     public Sprite PanelBackground;
     public Sprite ExitButtons;

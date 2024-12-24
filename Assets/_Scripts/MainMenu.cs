@@ -54,10 +54,12 @@ public class MainMenu : MonoBehaviour
 
     private void StartB()
     {
+        MainMenuSound.Instance.PopSound();
         SceneManager.LoadScene(1);
     }
     private void Theme()
     {
+        MainMenuSound.Instance.PopSound();
         AnimateOut(mainMenu, () =>
         {
             foreach (Transform item in mainMenu.GetChild(0).GetComponentInChildren<Transform>())
@@ -69,6 +71,7 @@ public class MainMenu : MonoBehaviour
     }
     private void Options()
     {
+        MainMenuSound.Instance.PopSound();
         AnimateOut(mainMenu, () =>
         {
             foreach (Transform item in mainMenu.GetChild(0).GetComponentInChildren<Transform>())
@@ -80,12 +83,14 @@ public class MainMenu : MonoBehaviour
     }
     private void Exit()
     {
+        MainMenuSound.Instance.PopSound();
         Application.Quit();
     }
 
 
     private void ExitTheme()
     {
+        MainMenuSound.Instance.PopSound();
         AnimateOut(theme, () =>
         {
             foreach (Transform item in theme.GetChild(2).GetComponentInChildren<Transform>())
@@ -97,6 +102,7 @@ public class MainMenu : MonoBehaviour
     }
     private void ExitOptions()
     {
+        MainMenuSound.Instance.PopSound();
         AnimateOut(options, () =>
         {
             foreach (Transform item in options.GetChild(2).GetComponentInChildren<Transform>())

@@ -66,12 +66,28 @@ public class AnimalsManager : MonoBehaviour
         Vector3 midPosition = (Animals[0].transform.position + Animals[1].transform.position) / 2;
 
         Player.Instance.score.AddScore(Animals[0].GetComponent<Animal>().score);
+        Player.Instance.scoreMG += Animals[0].GetComponent<Animal>().score;
+        UIManager.Instance.UpdateScoreUI();
 
         DestroyAnimals();
 
         GameObject animalClone = Instantiate(nextTierPrefab, midPosition, Quaternion.identity);
         animalClone.transform.localScale = Vector3.zero;
         animalClone.GetComponent<ScaleLerping>().enabled = true;
+
+        var themeManager = ThemeManager.Instance;
+        if (themeManager != null)
+        {
+            UpdateThemeSprites[] themeComponents = animalClone.GetComponentsInChildren<UpdateThemeSprites>();
+            foreach (var component in themeComponents)
+            {
+                Sprite newSprite = themeManager.GetSpriteForTag(component.spriteTag);
+                if (newSprite != null)
+                {
+                    component.ApplyTheme(newSprite);
+                }
+            }
+        }
 
         AnimalsAlive.Add(animalClone);
     }
@@ -90,6 +106,13 @@ public class AnimalsManager : MonoBehaviour
             Animals.RemoveAt(0);
             Animals.RemoveAt(0);
         }
+    }
+
+    public void RemoveAnimal(GameObject gameObject)
+    {
+        AnimalsAlive.Remove(gameObject);
+        Animals.Remove(gameObject);
+        Destroy(gameObject);
     }
 
     public void PopAnimals()
@@ -116,8 +139,8 @@ public class AnimalsManager : MonoBehaviour
         {
             if (AnimalsAlive[i] != null)
             {
-                AnimalsAlive[i].GetComponent<ScaleLerping>().ScaleZero();
                 SoundManager.Instance.PopSound();
+                AnimalsAlive[i].GetComponent<ScaleLerping>().ScaleZero();
                 yield return new WaitForSeconds(0.1f);
             }
         }
@@ -133,5 +156,9 @@ public class AnimalsManager : MonoBehaviour
         }
 
         AnimalsAlive.Clear();
+
+        yield return new WaitForSeconds(0.1f);
+
+        UIManager.Instance.EndGameUI();
     }
 }

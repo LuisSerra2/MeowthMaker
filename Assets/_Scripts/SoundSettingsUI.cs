@@ -8,6 +8,9 @@ public class SoundSettingsUI : MonoBehaviour
     public Toggle musicMuteToggle;
     public Toggle soundMuteToggle;
 
+    public Animator musicToggleAnimator;
+    public Animator soundToggleAnimator;
+
     private void Start()
     {
         if (SoundSettingsManager.Instance != null)
@@ -22,6 +25,26 @@ public class SoundSettingsUI : MonoBehaviour
         soundSlider.onValueChanged.AddListener(OnSoundVolumeChanged);
         musicMuteToggle.onValueChanged.AddListener(OnMusicMuteToggled);
         soundMuteToggle.onValueChanged.AddListener(OnSoundMuteToggled);
+    }
+
+    private void Update()
+    {
+
+        if (musicMuteToggle.isOn)
+        {
+            musicToggleAnimator.SetBool("On", true);
+        } else
+        {
+            musicToggleAnimator.SetBool("On", false);
+        }
+        
+        if (soundMuteToggle.isOn)
+        {
+            soundToggleAnimator.SetBool("On", true);
+        } else
+        {
+            soundToggleAnimator.SetBool("On", false);
+        }
     }
 
     private void OnMusicVolumeChanged(float volume)
@@ -40,6 +63,8 @@ public class SoundSettingsUI : MonoBehaviour
     {
         if (SoundSettingsManager.Instance != null)
             SoundSettingsManager.Instance.ToggleMusicMute(isMuted);
+
+
     }
 
     private void OnSoundMuteToggled(bool isMuted)

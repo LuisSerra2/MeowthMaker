@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Five
       objectReference: {fileID: 0}
+    - target: {fileID: 3244225079492121269, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -88,6 +92,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4857140065527652200, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: m_TagString
+      value: Tier5
+      objectReference: {fileID: 0}
     - target: {fileID: 5294623433849718141, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -111,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 6499265030630347861, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: tier
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428097447114214184, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: spriteTag
+      value: Tier5
       objectReference: {fileID: 0}
     - target: {fileID: 8833586359130523936, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_Sprite
@@ -149,7 +161,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328503168053457363}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fbc23ebfc8524104898614f11763c40a, type: 2}
   m_CullingMode: 0
