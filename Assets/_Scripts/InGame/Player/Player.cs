@@ -8,6 +8,7 @@ public enum GameStates
     MainMenu,
     Playing,
     MiniGame,
+    PauseButton,
     EndGame,
     ChangeTheme,
 }
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
 
     public Image fillMG;
     public float scoreMG = 0;
+
+    public GameObject explosion;
 
     private bool isTargetOn;
 
@@ -118,6 +121,8 @@ public class Player : MonoBehaviour
                 Minigame();
                 break;
 
+            case GameStates.PauseButton:
+                break;
             case GameStates.EndGame:
                 AnimalsManager.Instance.PopAnimals();
                 break;
@@ -134,12 +139,25 @@ public class Player : MonoBehaviour
     {
         float randomValue = Random.value;
         int selectedIndex;
-        if (randomValue < 0.5f)
+
+        bool canSpawnTier4 = AnimalsManager.Instance.MaxTierReached >= Tier.six;
+        bool canSpawnTier5 = AnimalsManager.Instance.MaxTierReached >= Tier.eight;
+
+        if (randomValue < 0.4f)
         {
             selectedIndex = 0;
-        } else if (randomValue < 0.85f)
+        } else if (randomValue < 0.75f)
         {
             selectedIndex = 1;
+        } else if (randomValue < 0.95f)
+        {
+            selectedIndex = 2;
+        } else if (canSpawnTier4 && randomValue < 0.975f)
+        {
+            selectedIndex = 3;
+        } else if (canSpawnTier5)
+        {
+            selectedIndex = 4;
         } else
         {
             selectedIndex = 2;
@@ -166,6 +184,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 
     private void HandleDrop()
     {
@@ -199,6 +218,7 @@ public class Player : MonoBehaviour
             foreach (GameObject target in AnimalsManager.Instance.AnimalsAlive)
             {
                 target.GetComponent<Animal>().isTargetOn = false;
+                target.GetComponent<Animal>().GetComponent<Rigidbody2D>().isKinematic = true;
                 target.GetComponent<Animal>().SpawnTarget();
             }
         }
@@ -209,6 +229,7 @@ public class Player : MonoBehaviour
         {
             foreach (GameObject target in AnimalsManager.Instance.AnimalsAlive)
             {
+                target.GetComponent<Animal>().GetComponent<Rigidbody2D>().isKinematic = false;
                 target.GetComponent<Animal>().DestroyTarget();
             }
 
@@ -230,12 +251,28 @@ public class Player : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out Animal animal))
                 {
+                    GameObject explosionClone = Instantiate(explosion, animal.transform.position, Quaternion.identity);
+                    if (explosionClone != null)
+                    {
+                        Destroy(explosionClone, 2f);
+                    }
                     score.AddScore(animal.score);
                     UIManager.Instance.UpdateScoreUI();
                     AnimalsManager.Instance.RemoveAnimal(animal.gameObject);
                     SoundManager.Instance.PopSound();
+                } else if (hit.collider.TryGetComponent(out WL wL))
+                {
+                    GameObject explosionClone = Instantiate(explosion, wL.transform.position, Quaternion.identity);
+                    if (explosionClone != null)
+                    {
+                        Destroy(explosionClone, 2f);
+                    }
+                    UIManager.Instance.UpdateScoreUI();
+                    AnimalsManager.Instance.RemoveAnimal(wL.GetComponentInParent<Animal>().gameObject);
+                    SoundManager.Instance.PopSound();
                 }
             }
+
         }
     }
 
@@ -258,5 +295,10 @@ public class Player : MonoBehaviour
             fillMG.gameObject.GetComponentInChildren<Button>().interactable = false;
             fillMG.GetComponentInParent<Animator>().SetBool("Charge", false);
         }
+    }
+
+    public void ChangeState(GameStates states)
+    {
+        gameStates = states;
     }
 }

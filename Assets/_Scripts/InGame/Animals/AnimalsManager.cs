@@ -20,6 +20,8 @@ public class AnimalsManager : MonoBehaviour
 {
     public static AnimalsManager Instance;
 
+
+    public Tier MaxTierReached = Tier.one;
     private Tier tier;
 
     public List<GameObject> Animals = new List<GameObject>();
@@ -95,6 +97,12 @@ public class AnimalsManager : MonoBehaviour
         animalClone.transform.localScale = Vector3.zero;
         animalClone.GetComponent<ScaleLerping>().enabled = true;
 
+        Animal animalComponent = animalClone.GetComponent<Animal>();
+        if (animalComponent != null && (int)animalComponent.tier > (int)MaxTierReached)
+        {
+            MaxTierReached = animalComponent.tier;
+        }
+
         var themeManager = ThemeManager.Instance;
         if (themeManager != null)
         {
@@ -111,6 +119,7 @@ public class AnimalsManager : MonoBehaviour
 
         AnimalsAlive.Add(animalClone);
     }
+
 
     private void DestroyAnimals()
     {

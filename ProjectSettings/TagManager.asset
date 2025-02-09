@@ -19,6 +19,10 @@ TagManager:
   - Tier8
   - Tier9
   - Tier10
+  - InGame
+  - PowerUp
+  - PowerUpBG
+  - PauseButton
   layers:
   - Default
   - TransparentFX

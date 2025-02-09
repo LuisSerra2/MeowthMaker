@@ -17,8 +17,11 @@ public class UIManager : MonoBehaviour
     public Vector3 OutPosition;
     public float animationDuration = 0.5f;
 
-    [Header("MainMenu")]
-    public RectTransform ThemeMenu;
+    [Header("PauseMenu")]
+    public RectTransform pauseMenu;
+    public Button pauseMenuButton;
+    public Button resume;
+    public Button mainMenu;
 
 
     [Header("EndMenu")]
@@ -44,20 +47,41 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         UpdateScoreUI();
-        Retry.onClick.AddListener(() => RetryButton());
-        ReturnToMainMenu.onClick.AddListener(() => ReturnToMainMenuButton());
+        Retry.onClick.AddListener(RetryButton);
+        ReturnToMainMenu.onClick.AddListener(ReturnToMainMenuButton);
+
+        mainMenu.onClick.AddListener(ReturnToMainMenuButton);
+        pauseMenuButton.onClick.AddListener(PauseMenu);
+        resume.onClick.AddListener(Resume);
 
         foreach (Transform item in EndMenu.GetChild(1).GetComponentInChildren<Transform>())
         {
             item.localScale = Vector3.zero;
         }
+        foreach (Transform item in pauseMenu.GetComponentInChildren<Transform>())
+        {
+            item.localScale = Vector3.zero;
+        }
+    }
+
+    private void PauseMenu()
+    {
+        pauseMenuButton.interactable = false;
+        Player.Instance.ChangeState(GameStates.PauseButton);
+        AnimateIn(pauseMenu, hasContentAnimation: true, false);
+    }
+    private void Resume()
+    {
+        pauseMenuButton.interactable = true;
+        Player.Instance.ChangeState(GameStates.Playing);
+        AnimateOut(pauseMenu);
     }
 
     public void EndGameUI()
     {
         bool isNewHighScore = score.CheckAndUpdateHighScore();
         UpdateHighScoreUI(isNewHighScore);
-        AnimateIn(EndMenu, hasContentAnimation: true);
+        AnimateIn(EndMenu, hasContentAnimation: true, true);
     }
 
     public void UpdateHighScoreUI(bool isNewHighScore = false)
@@ -86,6 +110,7 @@ public class UIManager : MonoBehaviour
 
     private void ReturnToMainMenuButton()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
@@ -96,11 +121,11 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void AnimateIn(RectTransform uiElement, bool hasContentAnimation)
+    public void AnimateIn(RectTransform uiElement, bool hasContentAnimation, bool isChild1)
     {
         if (hasContentAnimation)
         {
-            uiElement.DOAnchorPos(InPosition, animationDuration).OnComplete(() => StartCoroutine(ContentAnimPopUp()));
+            uiElement.DOAnchorPos(InPosition, animationDuration).OnComplete(() => StartCoroutine(ContentAnimPopUp(isChild1)));
         } else
         {
             uiElement.DOAnchorPos(InPosition, animationDuration);
@@ -112,12 +137,22 @@ public class UIManager : MonoBehaviour
         uiElement.DOAnchorPos(OutPosition, animationDuration);
     }
 
-    IEnumerator ContentAnimPopUp()
+    IEnumerator ContentAnimPopUp(bool isChild1)
     {
-        foreach (Transform item in EndMenu.GetChild(1).GetComponentInChildren<Transform>())
+        if (isChild1)
         {
-            item.DOScale(Vector3.one, 0.5f);
-            yield return new WaitForSeconds(0.05f);
+            foreach (Transform item in EndMenu.GetChild(1).GetComponentInChildren<Transform>())
+            {
+                item.DOScale(Vector3.one, 0.5f);
+                yield return new WaitForSeconds(0.05f);
+            }
+        } else
+        {
+            foreach (Transform item in pauseMenu.GetComponentInChildren<Transform>())
+            {
+                item.DOScale(Vector3.one, 0.5f);
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 }

@@ -61,6 +61,10 @@ public class ThemeManager : MonoBehaviour
         UpdateSprites("Button", assets.Buttons);
         UpdateSprites("PanelBackground", assets.PanelBackground);
         UpdateSprites("Exit", assets.ExitButtons);
+        UpdateSprites("InGame", assets.InGame);
+        UpdateSprites("PowerUp", assets.PowerUp);
+        UpdateSprites("PowerUpBG", assets.PowerUpBG);
+        UpdateSprites("PauseButton", assets.PauseButton);
         UpdateSprites("Tier1", assets.tierAnimal[0]);
         UpdateSprites("Tier2", assets.tierAnimal[1]);
         UpdateSprites("Tier3", assets.tierAnimal[2]);
@@ -109,6 +113,10 @@ public class ThemeManager : MonoBehaviour
             "Button" => assets.Buttons,
             "PanelBackground" => assets.PanelBackground,
             "Exit" => assets.ExitButtons,
+            "InGame" => assets.InGame,
+            "PowerUp" => assets.PowerUp,
+            "PowerUpBG" => assets.PowerUpBG,
+            "PauseButton" => assets.PauseButton,
             "Tier1" => assets.tierAnimal[0],
             "Tier2" => assets.tierAnimal[1],
             "Tier3" => assets.tierAnimal[2],
@@ -167,6 +175,10 @@ public class ThemeAssets
     public Sprite Buttons;
     public Sprite PanelBackground;
     public Sprite ExitButtons;
+    public Sprite InGame;
+    public Sprite PowerUp;
+    public Sprite PowerUpBG;
+    public Sprite PauseButton;
     public Sprite[] tierAnimal;
 }
 
