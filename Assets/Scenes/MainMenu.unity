@@ -1044,6 +1044,11 @@ MonoBehaviour:
     - {fileID: -2032872229, guid: 90e28a9025baf1d41b92d9350fbc6e09, type: 3}
     - {fileID: 908992041, guid: f7199d269ed1e0543a205f26c29cbfa9, type: 3}
     - {fileID: -1825903466, guid: c929f4837aa1cba4dbb769cc11fa69d6, type: 3}
+    - {fileID: 695202794, guid: 2c2d3ea22f3afa440890e6ec6066c498, type: 3}
+    - {fileID: 127976105, guid: 7374d6557234aa545b1a76a217e40411, type: 3}
+    - {fileID: 1727463236, guid: c507d435f8c6c9045897b631333cabf1, type: 3}
+    - {fileID: 296782324, guid: f3d5f3607ec1beb42813036058ca682b, type: 3}
+    - {fileID: 2028530705, guid: f119c350dd3cfc444ad5dbe65ec21915, type: 3}
   - themeName: Cat
     Background: {fileID: 21300000, guid: e3dde52d26e68854992460c9e775944a, type: 3}
     animalBackground: {fileID: 1594237187, guid: d8f270fbf8883e4428639d137dde496b, type: 3}
@@ -1056,6 +1061,11 @@ MonoBehaviour:
     - {fileID: 975712077, guid: ab0c98b7daa81c34ca1ed19f8f0a5605, type: 3}
     - {fileID: -950826966, guid: 79901eec9b68af440a3a287e7f266ba3, type: 3}
     - {fileID: -903554058, guid: cf759d84390a1ee439a7a38537bbb666, type: 3}
+    - {fileID: 254874998, guid: 98010217174d1854eb35ee52628318ee, type: 3}
+    - {fileID: -187262796, guid: f4ba70ba33245e949b3773d391612de9, type: 3}
+    - {fileID: -159522252, guid: cbd0f2c0918e3a54db6ef847943fcfeb, type: 3}
+    - {fileID: 137702251, guid: b6ff7728d3c631a468686766e39f575b, type: 3}
+    - {fileID: -1757085936, guid: c0d6c19779610a140a70056df4da0b63, type: 3}
   currentThemeIndex: 0
 --- !u!4 &442148903
 Transform:

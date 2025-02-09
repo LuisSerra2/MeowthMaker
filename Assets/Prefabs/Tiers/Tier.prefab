@@ -246,6 +246,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier: 0
   score: 10
+  target: {fileID: 7397169887606036783, guid: c7cd67c3f2374e64598d99b7dd01f464, type: 3}
+  isTargetOn: 0
+  targetClone: {fileID: 0}
 --- !u!114 &-2143600870344499064
 MonoBehaviour:
   m_ObjectHideFlags: 0

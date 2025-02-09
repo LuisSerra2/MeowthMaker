@@ -9,6 +9,11 @@ public enum Tier
     three,
     four,
     five,
+    six,
+    seven,
+    eight,
+    nine,
+    ten
 }
 
 public class AnimalsManager : MonoBehaviour
@@ -54,6 +59,21 @@ public class AnimalsManager : MonoBehaviour
                         InstantiateNextTier(tierOb[4]);
                         break;
                     case Tier.five:
+                        InstantiateNextTier(tierOb[5]);
+                        break;
+                    case Tier.six:
+                        InstantiateNextTier(tierOb[6]);
+                        break;
+                    case Tier.seven:
+                        InstantiateNextTier(tierOb[7]);
+                        break;
+                    case Tier.eight:
+                        InstantiateNextTier(tierOb[8]);
+                        break;
+                    case Tier.nine:
+                        InstantiateNextTier(tierOb[9]);
+                        break;
+                    case Tier.ten:
                         DestroyAnimals();
                         break;
                 }
@@ -97,16 +117,22 @@ public class AnimalsManager : MonoBehaviour
         SoundManager.Instance.PopSound();
         if (Animals.Count >= 2)
         {
-            AnimalsAlive.Remove(Animals[0]);
-            AnimalsAlive.Remove(Animals[1]);
-
-            Destroy(Animals[0]);
-            Destroy(Animals[1]);
+            GameObject animal1 = Animals[0];
+            GameObject animal2 = Animals[1];
 
             Animals.RemoveAt(0);
             Animals.RemoveAt(0);
+
+            Destroy(animal1);
+            Destroy(animal2);
         }
     }
+
+    public void RemoveFromAnimalAlive(GameObject gameObject)
+    {
+        AnimalsAlive.Remove(gameObject);
+    }
+
 
     public void RemoveAnimal(GameObject gameObject)
     {

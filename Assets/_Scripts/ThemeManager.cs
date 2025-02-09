@@ -66,6 +66,11 @@ public class ThemeManager : MonoBehaviour
         UpdateSprites("Tier3", assets.tierAnimal[2]);
         UpdateSprites("Tier4", assets.tierAnimal[3]);
         UpdateSprites("Tier5", assets.tierAnimal[4]);
+        UpdateSprites("Tier6", assets.tierAnimal[5]);
+        UpdateSprites("Tier7", assets.tierAnimal[6]);
+        UpdateSprites("Tier8", assets.tierAnimal[7]);
+        UpdateSprites("Tier9", assets.tierAnimal[8]);
+        UpdateSprites("Tier10", assets.tierAnimal[9]);
     }
 
     private void UpdateSprites(string tag, Sprite sprite)
@@ -109,6 +114,11 @@ public class ThemeManager : MonoBehaviour
             "Tier3" => assets.tierAnimal[2],
             "Tier4" => assets.tierAnimal[3],
             "Tier5" => assets.tierAnimal[4],
+            "Tier6" => assets.tierAnimal[5],
+            "Tier7" => assets.tierAnimal[6],
+            "Tier8" => assets.tierAnimal[7],
+            "Tier9" => assets.tierAnimal[8],
+            "Tier10" => assets.tierAnimal[9],
             _ => null,
         };
     }

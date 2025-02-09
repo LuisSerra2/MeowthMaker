@@ -8,6 +8,23 @@ public class Animal : MonoBehaviour
 
     public int score = 10;
 
+    public GameObject target;
+    public bool isTargetOn = false;
+
+    public GameObject targetClone;
+
+    public void SpawnTarget()
+    {
+        if (isTargetOn) return;
+        isTargetOn = true;
+        targetClone = Instantiate(target, transform);
+    }
+
+    public void DestroyTarget()
+    {
+        Destroy(targetClone);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.TryGetComponent(out Animal animal))
@@ -15,8 +32,7 @@ public class Animal : MonoBehaviour
             if (animal.tier == tier)
             {
                 AnimalsManager.Instance.Animals.Add(gameObject);
-                AnimalsManager.Instance.AnimalsAlive.Add(gameObject);
-
+                AnimalsManager.Instance.RemoveFromAnimalAlive(gameObject);
             }
         }
     }
@@ -28,7 +44,7 @@ public class Animal : MonoBehaviour
             if (animal.tier == tier)
             {
                 AnimalsManager.Instance.Animals.Add(gameObject);
-                AnimalsManager.Instance.AnimalsAlive.Add(gameObject);
+                AnimalsManager.Instance.RemoveFromAnimalAlive(gameObject);
             }
         }
     }

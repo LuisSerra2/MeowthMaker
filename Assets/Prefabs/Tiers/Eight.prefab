@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2143600870344499064, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: diseredScale
-      value: 2
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 90119441095088376, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_Sprite
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: -1825903466, guid: c929f4837aa1cba4dbb769cc11fa69d6, type: 3}
     - target: {fileID: 3244225079492121269, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_Name
-      value: Five
+      value: Eight
       objectReference: {fileID: 0}
     - target: {fileID: 3244225079492121269, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_TagString
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalPosition.x
@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3345198148120060066, guid: c7238513af6d934479e1e879a48ec645, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3844620552904513189, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_Radius
       value: 0.7089656
@@ -94,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4857140065527652200, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_TagString
-      value: Tier5
+      value: Tier8
       objectReference: {fileID: 0}
     - target: {fileID: 5294623433849718141, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_LocalScale.x
@@ -118,11 +122,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6499265030630347861, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: tier
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7428097447114214184, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: spriteTag
-      value: Tier5
+      value: Tier8
       objectReference: {fileID: 0}
     - target: {fileID: 8833586359130523936, guid: c7238513af6d934479e1e879a48ec645, type: 3}
       propertyPath: m_Sprite

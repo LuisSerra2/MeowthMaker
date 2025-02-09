@@ -14,6 +14,11 @@ TagManager:
   - Tier4
   - Tier5
   - Exit
+  - Tier6
+  - Tier7
+  - Tier8
+  - Tier9
+  - Tier10
   layers:
   - Default
   - TransparentFX

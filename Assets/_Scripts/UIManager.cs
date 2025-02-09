@@ -29,7 +29,9 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI highScoreLabel;
 
-
+    [Header("MiniGame")]
+    public GameObject miniGameText;
+    bool canShow;
 
     private Score score;
 
@@ -86,6 +88,13 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void Show_HideMGText()
+    {
+        canShow = !canShow;
+        miniGameText.SetActive(canShow);
+    }
+
 
     public void AnimateIn(RectTransform uiElement, bool hasContentAnimation)
     {

@@ -42,7 +42,9 @@ public class Player : MonoBehaviour
     public Image fillMG;
     public float scoreMG = 0;
 
-    private float MGdefaultTimer = 3f;
+    private bool isTargetOn;
+
+    public float MGdefaultTimer = 3f;
     private float MGTimer;
 
     private void Awake()
@@ -189,14 +191,33 @@ public class Player : MonoBehaviour
 
     private void Minigame()
     {
+
+        if (!isTargetOn)
+        {
+            isTargetOn = true;
+            UIManager.Instance.Show_HideMGText();
+            foreach (GameObject target in AnimalsManager.Instance.AnimalsAlive)
+            {
+                target.GetComponent<Animal>().isTargetOn = false;
+                target.GetComponent<Animal>().SpawnTarget();
+            }
+        }
+
         MGTimer -= Time.deltaTime;
 
         if (MGTimer <= 0)
         {
+            foreach (GameObject target in AnimalsManager.Instance.AnimalsAlive)
+            {
+                target.GetComponent<Animal>().DestroyTarget();
+            }
+
             scoreMG = 0;
             MGTimer = MGdefaultTimer;
             gameStates = GameStates.Playing;
             SoundManager.Instance.MusicAmbiente();
+            UIManager.Instance.Show_HideMGText();
+            isTargetOn = false;
         }
 
         if (Input.GetMouseButtonDown(0))
